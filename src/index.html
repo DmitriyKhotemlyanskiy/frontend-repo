@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps Booking Service</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <span class="brand"> Booking</span>
+            <div class="nav-tabs">
+                <button class="tab-btn active" onclick="switchScreen('new-reservation')">New Reservation</button>
+                <button class="tab-btn" onclick="switchScreen('lookup-reservation')">Reservation Lookup</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section id="new-reservation" class="screen active">
+            <div class="card">
+                <h2>Create New Reservation</h2>
+                <p class="subtitle">Select your destination and fill in details</p>
+                
+                <form id="booking-form">
+                    <div class="form-group">
+                        <label for="hotel-select">Select Hotel</label>
+                        <select id="hotel-select" required>
+                            <option value="" disabled selected>Loading available hotels...</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="full-name">Full Name</label>
+                        <input type="text" id="full-name" placeholder="John Doe" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="john.doe@example.com" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="check-in">Check-In Date</label>
+                            <input type="date" id="check-in" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="check-out">Check-Out Date</label>
+                            <input type="date" id="check-out" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Confirm Reservation</button>
+                </form>
+                <div id="booking-message" class="message hidden"></div>
+            </div>
+        </section>
+
+        <section id="lookup-reservation" class="screen">
+            <div class="card">
+                <h2>Reservation Lookup</h2>
+                <p class="subtitle">Search and manage your active bookings</p>
+
+                <div class="search-bar">
+                    <input type="text" id="search-input" placeholder="Enter Full Name or Email Address">
+                    <button onclick="searchReservations()" class="btn btn-secondary">Search</button>
+                </div>
+
+                <div id="search-results" class="results-container">
+                    </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
