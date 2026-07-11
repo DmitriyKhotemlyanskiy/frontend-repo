@@ -36,7 +36,8 @@ jobs:
           repository: 'DmitriyKhotemlyanskiy/infra-repo'
           ref: 'dev'
           token: ${{ secrets.PAT_TOKEN }}
-
+      - name: Check if infra-repo downloaded
+        run: ls -la
       - name: Update Frontend Image Tag
         run: |
           NEW_TAG="${{ github.sha }}"
