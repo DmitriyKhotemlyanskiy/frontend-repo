@@ -42,6 +42,7 @@ jobs:
         run: |
           NEW_TAG="${{ github.sha }}"
           IMAGE_NAME="${{ secrets.DOCKERHUB_USERNAME }}/frontend-py3-app"
+
           MANIFEST_PATH="kubernetes/deployments/frontend-deployment.yaml"
           
           echo "Updating image tag to $NEW_TAG inside infra-repo..."
@@ -56,9 +57,11 @@ jobs:
           branch: "auto-deploy/update-frontend"
           base: "main" # PR to main branch in infra-repo
           title: "🚀 Auto-Deploy: Update frontend to ${{ github.sha }}"
+
           body: "Automatically generated PR to update frontend image tag. @DmitriyKhotemlyanskiy please review and approve."
           #reviewers: "DmitriyKhotemlyanskiy" # Review request to YakirBar
 
       - name: Show PR Info
         run: |
           echo "Pull Request successfully created: ${{ steps.cpr.outputs.pull-request-url }}"
+
