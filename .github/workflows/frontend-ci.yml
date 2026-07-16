@@ -42,12 +42,7 @@ jobs:
         run: |
           NEW_TAG="${{ github.sha }}"
           IMAGE_NAME="${{ secrets.DOCKERHUB_USERNAME }}/frontend-py3-app"
-<<<<<<< HEAD
           MANIFEST_PATH="infra-repo/kubernetes/deployments/frontend-deployment.yaml"
-=======
-
-          MANIFEST_PATH="kubernetes/deployments/frontend-deployment.yaml"
->>>>>>> f8c407c1ce6976ed6bbfc479a8cbadfd464a863d
           
           echo "Updating image tag to $NEW_TAG inside infra-repo..."
           sed -i "s|image: $IMAGE_NAME:.*|image: $IMAGE_NAME:$NEW_TAG|g" $MANIFEST_PATH
