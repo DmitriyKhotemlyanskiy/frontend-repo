@@ -10,6 +10,18 @@
     --border-color: #e5e5ea;
     --shadow-soft: 0 8px 30px rgba(0, 0, 0, 0.04);
 }
+/* Hotel Description Card */
+.hotel-desc-card {
+    background-color: #f5f5f7;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-top: -10px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
 
 * {
     box-sizing: border-box;

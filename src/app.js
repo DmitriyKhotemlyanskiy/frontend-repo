@@ -27,15 +27,19 @@ function switchScreen(screenId) {
 }
 
 // 3. Fetch hotels from backend to fill the dropdown list
+let cachedHotels = [];
+
+// 3. Fetch hotels from backend to fill the dropdown list
 async function fetchHotels() {
     const select = document.getElementById('hotel-select');
     try {
         const response = await fetch(`${API_BASE_URL}/api/hotels`);
         if (!response.ok) throw new Error("Network response error");
-        const hotels = await response.json();
+        
+        cachedHotels = await response.json(); // Сохраняем в кэш
         
         select.innerHTML = '<option value="" disabled selected>Choose a hotel...</option>';
-        hotels.forEach(hotel => {
+        cachedHotels.forEach(hotel => {
             const option = document.createElement('option');
             option.value = hotel.id;
             option.textContent = `${hotel.name} — ${hotel.location} ($${hotel.price}/night)`;
@@ -43,6 +47,24 @@ async function fetchHotels() {
         });
     } catch (err) {
         select.innerHTML = '<option value="" disabled>Error loading hotels. Is backend up?</option>';
+    }
+}
+
+// 3.1. Display selected hotel description
+function displayHotelDescription() {
+    const select = document.getElementById('hotel-select');
+    const selectedCard = document.getElementById('hotel-description-card');
+    const descText = document.getElementById('hotel-description-text');
+    
+    const selectedId = select.value;
+    const hotel = cachedHotels.find(h => h.id === selectedId);
+
+    if (hotel && hotel.description) {
+        descText.textContent = hotel.description;
+        selectedCard.classList.remove('hidden');
+    } else {
+        selectedCard.classList.add('hidden');
+        descText.textContent = "";
     }
 }
 
@@ -70,10 +92,11 @@ document.getElementById('booking-form').addEventListener('submit', async (e) => 
         
         messageDiv.classList.remove('hidden', 'success', 'error');
         if (response.ok) {
-            messageDiv.classList.add('success');
-            messageDiv.textContent = `✓ ${data.message}! ID: ${data.id}`;
-            document.getElementById('booking-form').reset();
-        } else {
+                messageDiv.classList.add('success');
+                messageDiv.textContent = `✓ ${data.message}! ID: ${data.id}`;
+                document.getElementById('booking-form').reset();
+                document.getElementById('hotel-description-card').classList.add('hidden'); // Скрываем описание
+            } else {
             messageDiv.classList.add('error');
             messageDiv.textContent = `Error: ${data.error}`;
         }
