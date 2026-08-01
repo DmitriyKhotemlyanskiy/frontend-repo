@@ -22,7 +22,7 @@ COPY /src .
 #  Connection to backend-app url
 ENV API_URL=http://localhost:8085
 
-# Expose port 8000 to allow network traffic to the container
+# Expose port 3000 to allow network traffic to the container
 EXPOSE 3000
 
 # Run Python's unbuffered http.server on port 3000 serving from the /app directory

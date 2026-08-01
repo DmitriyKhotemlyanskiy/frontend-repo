@@ -95,7 +95,7 @@ document.getElementById('booking-form').addEventListener('submit', async (e) => 
                 messageDiv.classList.add('success');
                 messageDiv.textContent = `✓ ${data.message}! ID: ${data.id}`;
                 document.getElementById('booking-form').reset();
-                document.getElementById('hotel-description-card').classList.add('hidden'); // Скрываем описание
+                document.getElementById('hotel-description-card').classList.add('hidden');
             } else {
             messageDiv.classList.add('error');
             messageDiv.textContent = `Error: ${data.error}`;
